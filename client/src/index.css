@@ -1,0 +1,225 @@
+:root {
+  --bg: #0f0f17;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-strong: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #f2f2f7;
+  --muted: #a0a0b4;
+  --accent: #ff4d6d;
+  --accent-2: #ff8a3d;
+  --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
+  font-family: 'Segoe UI', system-ui, Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255, 77, 109, 0.18), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(255, 138, 61, 0.15), transparent 40%),
+    var(--bg);
+}
+
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 12px;
+  background: var(--gradient);
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  box-shadow: 0 6px 18px rgba(255, 77, 109, 0.3);
+}
+button:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255, 77, 109, 0.45); }
+button.secondary { background: var(--surface-strong); box-shadow: none; border: 1px solid var(--border); }
+button.secondary:hover:not(:disabled) { background: rgba(255, 255, 255, 0.16); box-shadow: none; }
+button:disabled { opacity: 0.5; cursor: default; }
+
+input, textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text);
+  font: inherit;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input::placeholder, textarea::placeholder { color: var(--muted); }
+input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.2); }
+textarea { resize: vertical; }
+
+.brand {
+  font-size: 22px;
+  font-weight: 800;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.message { margin: 0; padding: 10px 12px; border-radius: 10px; font-size: 14px; }
+.message.success { background: rgba(46, 204, 113, 0.15); color: #6ee7a0; border: 1px solid rgba(46, 204, 113, 0.3); }
+.message.error { background: rgba(255, 77, 109, 0.12); color: #ff8fa3; border: 1px solid rgba(255, 77, 109, 0.3); }
+
+/* Auth */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.auth-form {
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: fadeUp 0.4s ease;
+}
+.auth-form h1 { margin: 4px 0 0; font-size: 26px; letter-spacing: 3px; font-weight: 700; }
+.subtitle { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
+.auth-buttons { display: flex; gap: 10px; margin-top: 6px; }
+.auth-buttons button { flex: 1; }
+
+/* Movies */
+.movies-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.movies-header {
+  position: sticky;
+  top: 16px;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(20, 20, 30, 0.75);
+  backdrop-filter: blur(16px);
+}
+.header-left, .user-info { display: flex; align-items: center; gap: 16px; }
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--gradient);
+  font-weight: 700;
+}
+.empty { text-align: center; color: var(--muted); padding: 60px 0; font-size: 17px; }
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  animation: fadeUp 0.35s ease;
+}
+.movie-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 77, 109, 0.5);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+.movie-poster {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, #2a2a3d, #15151f);
+  overflow: hidden;
+}
+.movie-poster img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.movie-card:hover .movie-poster img { transform: scale(1.05); }
+.poster-placeholder { font-size: 56px; opacity: 0.6; }
+.runtime-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  font-size: 12px;
+  font-weight: 600;
+}
+.movie-body { padding: 14px 16px 6px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.movie-title { margin: 0; font-size: 17px; }
+.movie-meta { margin: 0; font-size: 14px; color: var(--muted); }
+.movie-description {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.remove {
+  margin: 10px 16px 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 77, 109, 0.4);
+  color: #ff8fa3;
+  box-shadow: none;
+}
+.remove:hover:not(:disabled) { background: rgba(255, 77, 109, 0.15); box-shadow: none; }
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+.modal {
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: #1a1a26;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+  animation: fadeUp 0.25s ease;
+}
+.modal h2 { margin: 0 0 6px; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 600px) {
+  .movies-header { flex-direction: column; gap: 12px; }
+}

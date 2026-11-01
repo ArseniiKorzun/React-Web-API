@@ -7,10 +7,16 @@ namespace WebApplication1.Context
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+
         }
 
-        public DbSet<Book> Book { get; set; }
+        public DbSet<User> Users { get; set; }
+
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Review> Reviews { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+        }
     }
 }
